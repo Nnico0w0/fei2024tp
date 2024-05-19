@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DATABASEUSER}
+      POSTGRES_PASSWORD: ${DATABASEPASS}
+      POSTGRES_DB: ${DATABASENAME}
+    ports:
+      - "${DATABASEPORT}:5432"
+    volumes:
+      - ./data/dbdata:/var/lib/postgresql/data
