@@ -2,10 +2,28 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: ${DATABASEUSER}
-      POSTGRES_PASSWORD: ${DATABASEPASS}
-      POSTGRES_DB: ${DATABASENAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+      POSTGRES_DB: ${DATABASE_NAME}
+
     ports:
-      - "${DATABASEPORT}:5432"
+      - "${DATABASE_PORT}:5432"
     volumes:
       - ./data/dbdata:/var/lib/postgresql/data
+
+  django:
+    image: aulas2024tp:0.1
+    build:
+      context: ./config/django-image
+    volumes:
+      - ./backend:/usr/src/app:delegated
+
+    environment:
+      DJANGO_SU_NAME: ${DJANGO_SU_NAME}
+      DJANGO_SU_EMAIL: ${DJANGO_SU_EMAIL}
+      DJANGO_SU_PASSWORD: ${DJANGO_SU_PASSWORD}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASS: ${DATABASE_PASS}
+      DATABASE_NAME: ${DATABASE_NAME}
+    ports:
+      - "8000:8000"

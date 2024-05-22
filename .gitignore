@@ -1,2 +1,4 @@
 ./data/dbdata
 .env
+src/django/app/__pycache__
+
