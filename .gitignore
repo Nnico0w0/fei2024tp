@@ -1,4 +1,4 @@
-./data/dbdata
+data/dbdata
 .env
 src/django/app/__pycache__
 
